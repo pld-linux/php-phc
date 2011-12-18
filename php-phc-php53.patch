@@ -1,0 +1,14 @@
+--- phc-0.3.0.1/src/embed/optimize.cpp~	2010-10-26 15:17:27.000000000 +0200
++++ phc-0.3.0.1/src/embed/optimize.cpp	2011-12-18 21:05:56.277363114 +0100
+@@ -220,7 +220,11 @@
+ 
+ 	zend_fcall_info fci;
+ 	zend_fcall_info_cache fcic;
++#if PHP_VERSION_ID < 50300
+ 	int result = zend_fcall_info_init (&fn, &fci, &fcic TSRMLS_CC);
++#else
++	int result = zend_fcall_info_init (&fn, 0, &fci, &fcic, NULL, NULL TSRMLS_CC);
++#endif
+ 
+ 	if (result != SUCCESS)
+ 		return NULL;
