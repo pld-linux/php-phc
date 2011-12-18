@@ -12,7 +12,7 @@
  			AC_DEFINE(HAVE_EMBED, 1)
  			AC_SUBST([libphp_headers], ["-isystem${PHP_INSTALL_PATH}/include/php -isystem${PHP_INSTALL_PATH}/include/php/main -isystem${PHP_INSTALL_PATH}/include/php/TSRM -isystem${PHP_INSTALL_PATH}/include/php/Zend"])
 -			LIBS="-lphp5 -L${PHP_INSTALL_PATH}/lib -R${PHP_INSTALL_PATH}/lib $LIBS"
-+			LIBS="-lphp_common -L${PHP_INSTALL_PATH}/lib $LIBS"
++			LIBS="-lphp5 -lphp_common -L${PHP_INSTALL_PATH}/lib $LIBS"
  		], 
  		[
  			AS_VAR_SET(found_embed_sapi, no)
