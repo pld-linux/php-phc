@@ -1,0 +1,13 @@
+fix boost_regex detection
+
+--- phc-0.3.0.1.orig/m4/ax_boost_regex.m4	2011-10-01 20:54:55.000000000 +0200
++++ phc-0.3.0.1/m4/ax_boost_regex.m4	2011-12-18 20:46:55.588017783 +0100
+@@ -72,7 +72,7 @@
+ 			AC_DEFINE(HAVE_BOOST_REGEX,,[define if the Boost::Regex library is available])
+             BOOSTLIBDIR=`echo $BOOST_LDFLAGS | sed -e 's/@<:@^\/@:>@*//'`
+             if test "x$ax_boost_user_regex_lib" = "x"; then
+-                for libextension in `ls $BOOSTLIBDIR/libboost_regex*.{so,a}* 2>/dev/null | sed 's,.*/,,' | sed -e 's;^lib\(boost_regex.*\)\.so.*$;\1;' -e 's;^lib\(boost_regex.*\)\.a*$;\1;'` ; do
++                for libextension in `ls $BOOSTLIBDIR/libboost_regex*.so* $BOOSTLIBDIR/libboost_regex*.a* 2>/dev/null | sed 's,.*/,,' | sed -e 's;^lib\(boost_regex.*\)\.so.*$;\1;' -e 's;^lib\(boost_regex.*\)\.a*$;\1;'` ; do
+                      ax_lib=${libextension}
+ 				    AC_CHECK_LIB($ax_lib, exit,
+                                  [BOOST_REGEX_LIB="-l$ax_lib"; AC_SUBST(BOOST_REGEX_LIB) link_regex="yes"; break],
