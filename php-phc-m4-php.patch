@@ -1,0 +1,24 @@
+--- phc-0.3.0.1.orig/m4/php-embed.m4	2010-09-22 06:22:34.000000000 +0200
++++ phc-0.3.0.1/m4/php-embed.m4	2011-12-18 20:54:43.272949473 +0100
+@@ -17,18 +17,18 @@
+ 	LDFLAGS="-L${PHP_INSTALL_PATH}/lib $LDFLAGS"	
+ 	CFLAGS="-isystem${PHP_INSTALL_PATH}/include/php -isystem${PHP_INSTALL_PATH}/include/php/main -isystem${PHP_INSTALL_PATH}/include/php/TSRM -isystem${PHP_INSTALL_PATH}/include/php/Zend $CFLAGS"
+ 	AC_CHECK_LIB(
+-		[php5], 
++		[php_common], 
+ 		[zend_eval_string], 
+ 		[
+ 			AS_VAR_SET(found_embed_sapi, yes)
+ 			AC_DEFINE(HAVE_EMBED, 1)
+ 			AC_SUBST([libphp_headers], ["-isystem${PHP_INSTALL_PATH}/include/php -isystem${PHP_INSTALL_PATH}/include/php/main -isystem${PHP_INSTALL_PATH}/include/php/TSRM -isystem${PHP_INSTALL_PATH}/include/php/Zend"])
+-			LIBS="-lphp5 -L${PHP_INSTALL_PATH}/lib -R${PHP_INSTALL_PATH}/lib $LIBS"
++			LIBS="-lphp_common -L${PHP_INSTALL_PATH}/lib $LIBS"
+ 		], 
+ 		[
+ 			AS_VAR_SET(found_embed_sapi, no)
+ 		], 
+-		[]
++		["-lphp5"]
+ 		)
+ 	AC_CHECK_HEADER(
+ 		[sapi/embed/php_embed.h], 
